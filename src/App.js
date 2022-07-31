@@ -6,24 +6,24 @@ import { moviesData } from './Data';
 function App() {
   const [movies,setMovies] = useState(moviesData);
   const [searchValue,setSearchValue] = useState("");
-  const [searchRating,setSearchRating] = useState("");
+  const [searchRating,setSearchRating] = useState(0);
 
   const handleSearch=(e) => {
    setSearchValue(e.target.value)
  }
 
-const handleRating=(a) => {
-   setSearchRating(a)
- }
+ const handleRating=(e) => {
+  setSearchRating(Number(e.target.value))
+}
 
-  const AddMovie = (e) => {
+
+  const AddMovie = () => {
     const data = {
       imageSrc: document.getElementsByName("imageSrc")[0].value,
       rating: Number(document.getElementsByName("rating")[0].value),
       title: document.getElementsByName("title")[0].value,
       description: document.getElementsByName("des")[0].value
     };
-    console.log(data);
     setMovies([...movies, data]);
     document.getElementsByName("title")[0].value = "";
     document.getElementsByName("imageSrc")[0].value = "";
@@ -33,7 +33,7 @@ const handleRating=(a) => {
 
   return (
     <div>
-      <Nav searchValue={searchValue} handleSearch={handleSearch} ratingValue={searchRating} handleRating={handleRating}/>
+      <Nav searchValue={searchValue} handleSearch={handleSearch} searchRating={searchRating} handleRating={handleRating}/>
       <div className="m-2">
         <button type="button" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#modal">Add movie</button>
       </div>
